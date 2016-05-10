@@ -27,7 +27,7 @@ defmodule NewRelixir do
         true
       "true" ->
         true
-      anything ->
+      _ ->
         false
     end
 
