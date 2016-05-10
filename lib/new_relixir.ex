@@ -22,6 +22,17 @@ defmodule NewRelixir do
 
     :ok = :statman_server.add_subscriber(:statman_aggregator)
 
+    high_security = case Application.get_env(:new_relixir, :high_security) do
+      true ->
+        true
+      "true" ->
+        true
+      _ ->
+        false
+    end
+
+    Application.put_env(:newrelic, :high_security, high_security)
+
     if (app_name = Application.get_env(:new_relixir, :application_name)) && (license_key = Application.get_env(:new_relixir, :license_key)) do
       Application.put_env(:newrelic, :application_name, to_char_list(app_name))
       Application.put_env(:newrelic, :license_key, to_char_list(license_key))
